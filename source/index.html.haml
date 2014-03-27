@@ -1,0 +1,43 @@
+---
+title: Clance Impostor Phenomenon Score
+---
+:scss
+  li {
+    padding-bottom: 10px;
+    font-size: 16px;
+  }
+  div.response {
+    padding-top: 5px;
+  }
+:coffeescript
+  questions = (#{data.questions.to_json}).questions
+  questionTemplate = _.template("
+  <li>
+    <%= question %><br/>
+    <div class='btn-group response' data-toggle='buttons'>
+      <label class='btn btn-primary'>
+        <input type='radio' name='response<%= index %>' value='1'> Not at all true
+      </label>
+      <label class='btn btn-primary'>
+        <input type='radio' name='response<%= index %>' value='2'> Rarely
+      </label>
+      <label class='btn btn-primary'>
+        <input type='radio' name='response<%= index %>' value='3'> Sometimes
+      </label>
+      <label class='btn btn-primary'>
+        <input type='radio' name='response<%= index %>' value='4'> Often
+      </label>
+      <label class='btn btn-primary'>
+        <input type='radio' name='response<%= index %>' value='5'> Very true
+      </label>
+    </div>
+  </li>
+  ")
+  $ ->
+    _.each(questions, (question, index) ->
+      $('#questions ol').append(questionTemplate(index: index, question: question))
+    )
+
+%h2 Clance Impostor Phenomenon Test
+#questions
+  %ol
