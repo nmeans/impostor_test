@@ -16,28 +16,43 @@ title: Clance Impostor Phenomenon Score
     <%= question %><br/>
     <div class='btn-group response' data-toggle='buttons'>
       <label class='btn btn-primary'>
-        <input type='radio' name='response<%= index %>' value='1'> Not at all true
+        <input type='radio' class='response' name='response<%= index %>' value=1> Not at all true
       </label>
       <label class='btn btn-primary'>
-        <input type='radio' name='response<%= index %>' value='2'> Rarely
+        <input type='radio' class='response' name='response<%= index %>' value=2> Rarely
       </label>
       <label class='btn btn-primary'>
-        <input type='radio' name='response<%= index %>' value='3'> Sometimes
+        <input type='radio' class='response' name='response<%= index %>' value=3> Sometimes
       </label>
       <label class='btn btn-primary'>
-        <input type='radio' name='response<%= index %>' value='4'> Often
+        <input type='radio' class='response' name='response<%= index %>' value=4> Often
       </label>
       <label class='btn btn-primary'>
-        <input type='radio' name='response<%= index %>' value='5'> Very true
+        <input type='radio' class='response' name='response<%= index %>' value=5> Very true
       </label>
     </div>
   </li>
   ")
+
+  scoreTemplate = _.template("<h2>Your Score: <%= score %></h2>")
+
   $ ->
     _.each(questions, (question, index) ->
       $('#questions ol').append(questionTemplate(index: index, question: question))
     )
 
+    $('button#calculate').click( (event) ->
+      event.preventDefault()
+      values = _.map($("input.response:checked"), (el) -> $(el).val())
+      score = _.reduce(values, (memo, response) ->
+        return memo + parseInt(response)
+      , 0)
+      $('#content').html(scoreTemplate(score: score));
+    )
+
 %h2 Clance Impostor Phenomenon Test
-#questions
-  %ol
+#content
+  %form{id: 'impostor_test'}
+    #questions
+      %ol
+      %button{type: 'submit', id: 'calculate', class: 'btn btn-primary'} Submit
