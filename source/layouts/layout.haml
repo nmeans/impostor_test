@@ -12,10 +12,14 @@
     %title= current_page.data.title
 
     = stylesheet_link_tag "screen"
-    = javascript_include_tag "http://code.jquery.com/jquery-1.11.0.min.js"
-    = javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"
     = javascript_include_tag "all"
 
   %body
     .container
       = yield
+
+  %footer
+    .container
+      %p Questions and Scoring from <em>The Impostor Phenomenon: When Success Makes You Feel Like A Fake</em> (pp. 20-22), by P.R. Clance, 1985, Toronto: Bantam Books. Copyright 1985 by Pauline Rose Clance, Ph.D., ABPP. Included by permission. Do not reproduce without permission from Pauline Rose Clance, #{ mail_to "drpaulinerose@comcast.net" }, #{ link_to "www.paulineroseclance.com" }.
+      %p Online version created by #{ link_to "Nickolas Means", "http://nickol.as" }, Copyright 2014.
+
